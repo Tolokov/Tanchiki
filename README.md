@@ -4,8 +4,9 @@ Development of a computer game in Python by a team of students studying machine 
 Pygame/Python 3.11
 
 List of developers:
-* Tolokov Vitaliy
 * ...
+* Tolokov Vitaliy
+
 
 
 ---
