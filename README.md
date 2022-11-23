@@ -6,6 +6,7 @@ Pygame/Python 3.11
 List of developers:
 * ...
 * Tolokov Vitaliy
+* Skubenich Alexandr
 
 
 
