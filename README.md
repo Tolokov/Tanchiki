@@ -5,6 +5,7 @@ Pygame/Python 3.11
 
 List of developers:
 * ...
+* Mikhail Milyaev
 * Yakovlev Denis
 * Khosroev Yuriy
 * Tolokov Vitaliy
