@@ -11,7 +11,7 @@ List of developers:
 * Khosroev Yuriy
 * Tolokov Vitaliy
 * Skubenich Alexandr
-
+* Momot Ivan
 
 
 ---
