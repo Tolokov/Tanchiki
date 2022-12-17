@@ -13,6 +13,7 @@ List of developers:
 * Tolokov Vitaliy
 * Skubenich Alexandr
 * Momot Ivan
+* Serov Kirill
 
 
 ---
