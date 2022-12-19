@@ -14,7 +14,7 @@ List of developers:
 * Skubenich Alexandr
 * Momot Ivan
 * Serov Kirill
-
+* Zanolotskih Mihail
 
 ---
 References:
