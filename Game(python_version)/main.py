@@ -1,5 +1,7 @@
 import pygame
 
+from system.keyboard import controller
+
 
 class GameWindow:
     def __init__(self):
@@ -29,8 +31,12 @@ class GameWindow:
                 # Quit buttons
                 if event.type == pygame.QUIT:
                     self.status_run = False
-                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAP:
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     self.status_run = False
+
+                # User action
+                if event.type == pygame.KEYDOWN:
+                    controller(event)
 
     def run(self):
         self.set_icon()
