@@ -1,35 +1,29 @@
 import pygame
 
 
-def controller(event):
+def controller(event, obj):
     # Up key
-    if event.key == pygame.K_w:
-        print('w')
-    elif event.key == pygame.K_UP:
+    if event.key == pygame.K_w or event.key == pygame.K_UP:
         print('UP')
+        obj.draw_rect(0, -1)
 
     # Down key
-    elif event.key == pygame.K_a:
-        print('a')
-    elif event.key == pygame.K_LEFT:
+    elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
         print('LEFT')
+        obj.draw_rect(-1, 0)
 
     # Left key
-    elif event.key == pygame.K_s:
-        print('s')
-    elif event.key == pygame.K_DOWN:
+    elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
         print('DOWN')
+        obj.draw_rect(0, 1)
 
     # Right key
-    elif event.key == pygame.K_d:
-        print('d')
-    elif event.key == pygame.K_RIGHT:
+    elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
         print('RIGHT')
+        obj.draw_rect(1, 0)
 
     # Shoot key
-    elif event.key == pygame.K_SPACE:
-        print('SPACE')
-    elif event.key == pygame.K_z:
+    elif event.key == pygame.K_SPACE or event.key == pygame.K_z:
         print('Z')
 
     # Pause key
