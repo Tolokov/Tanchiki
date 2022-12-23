@@ -1,7 +1,11 @@
 import pygame
+from os import environ
 
 from system.keyboard import controller
 from system.tank import Tank
+
+# Debug mod ON=true OFF=false
+environ['DEBUG'] = 'true'
 
 
 class GameWindow:
@@ -17,11 +21,12 @@ class GameWindow:
         self.objects = list()
 
     def set_icon(self):
+        # Icon
         icon_img = pygame.image.load(self.path_to_logo)
         pygame.display.set_icon(icon_img)
 
     def create_window(self):
-        # display size and background color
+        # Display size and background color
         self.screen = pygame.display.set_mode(self.display_size)
         self.screen.fill(self.background_color)
 
@@ -67,5 +72,7 @@ class GameWindow:
 
 
 if "__main__" == __name__:
+    if environ['DEBUG'] == 'true':
+        print('Debug mod: ON')
     game = GameWindow()
     game.run()

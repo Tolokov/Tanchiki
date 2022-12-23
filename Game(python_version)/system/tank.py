@@ -1,4 +1,5 @@
 import pygame
+from os import environ
 
 
 class Tank(object):
@@ -30,6 +31,12 @@ class Tank(object):
         self.right_border -= move_x
         self.head_border += move_y
         self.foot_border -= move_y
+
+        if environ['DEBUG'] == 'true':
+            print(
+                f'X={move_x} Y={move_y} '
+                f'lb={self.left_border} rb={self.right_border} hb={self.head_border} fb={self.foot_border}'
+            )
 
         # IF a collision then stop
         if self.head_border < 0:
