@@ -30,6 +30,7 @@ class GameWindow:
         pygame.display.flip()
 
     def build(self):
+        # Infinite loop
         while self.status_run:
             for event in pygame.event.get():
 
@@ -39,7 +40,7 @@ class GameWindow:
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     self.status_run = False
 
-                # User action
+                # Move buttons
                 if event.type == pygame.KEYDOWN:
                     for obj in self.objects:
                         self.screen.fill(self.background_color)
@@ -61,7 +62,7 @@ class GameWindow:
         self.build()
 
     def create_player(self):
-        player = Tank(self.screen)
+        player = Tank(self.screen, self.display_size)
         self.objects.append(player)
 
 
