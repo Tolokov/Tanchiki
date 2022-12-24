@@ -67,7 +67,7 @@ class GameWindow:
         self.build()
 
     def create_player(self):
-        player = Tank(self.screen, self.display_size)
+        player = Tank(self.screen, self.display_size, self.background_color)
         self.objects.append(player)
 
 

@@ -3,17 +3,18 @@ from os import environ
 
 
 class Tank(object):
-    def __init__(self, screen, display_size):
+    def __init__(self, screen, display_size, bg_color):
         # Get window size
         self.border = display_size
         self.screen = screen
+        self.bg_color = bg_color
 
         # Position
         self.pointX = 500
         self.pointY = 500
         self.wight = 50
         self.height = 50
-        self.rectangle = pygame.draw.rect(self.screen, 'yellow', (self.pointX, self.pointY, self.wight, self.height))
+        self.rectangle = pygame.draw.rect(self.screen, self.bg_color, (self.pointX, self.pointY, self.wight, self.height))
         self.speed = 25
 
         # Player image
@@ -29,6 +30,7 @@ class Tank(object):
         self.player_sprite_D = pygame.image.load(r"..\images\playerD.png").convert_alpha()
         self.player_sprite_D = pygame.transform.scale(self.player_sprite_D, (self.wight, self.height))
 
+        # Default direction
         self.player_sprite = self.player_sprite_W
 
         # Calculated border values
@@ -87,5 +89,5 @@ class Tank(object):
             self.right_border = self.border[1] - self.height
 
         self.rectangle = self.rectangle.move(move_x, move_y)
-        pygame.draw.rect(self.screen, (255, 255, 0), self.rectangle)
+        pygame.draw.rect(self.screen, self.bg_color, self.rectangle)
         self.screen.blit(self.player_sprite, self.rectangle)
