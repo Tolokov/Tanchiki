@@ -14,7 +14,7 @@ class Tank(object):
         self.wight = 50
         self.height = 50
         self.rectangle = pygame.draw.rect(self.screen, 'yellow', (self.pointX, self.pointY, self.wight, self.height))
-        self.speed = 50
+        self.speed = 25
 
         # Calculated border values
         self.head_border = self.border[0] - self.pointX
