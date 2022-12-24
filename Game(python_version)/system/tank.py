@@ -16,11 +16,29 @@ class Tank(object):
         self.rectangle = pygame.draw.rect(self.screen, 'yellow', (self.pointX, self.pointY, self.wight, self.height))
         self.speed = 25
 
+        # Player image
+        self.player_sprite_W = pygame.image.load(r"..\images\playerW.png").convert_alpha()
+        self.player_sprite_W = pygame.transform.scale(self.player_sprite_W, (self.wight, self.height))
+
+        self.player_sprite_A = pygame.image.load(r"..\images\playerA.png").convert_alpha()
+        self.player_sprite_A = pygame.transform.scale(self.player_sprite_A, (self.wight, self.height))
+
+        self.player_sprite_S = pygame.image.load(r"..\images\playerS.png").convert_alpha()
+        self.player_sprite_S = pygame.transform.scale(self.player_sprite_S, (self.wight, self.height))
+
+        self.player_sprite_D = pygame.image.load(r"..\images\playerD.png").convert_alpha()
+        self.player_sprite_D = pygame.transform.scale(self.player_sprite_D, (self.wight, self.height))
+
+        self.player_sprite = self.player_sprite_W
+
         # Calculated border values
         self.head_border = self.border[0] - self.pointX
         self.foot_border = self.border[0] - self.pointX - self.height
         self.left_border = self.border[1] - self.pointY
         self.right_border = self.border[1] - self.pointY - self.wight
+
+        # Draw player image
+        self.screen.blit(self.player_sprite_W, self.rectangle)
 
     def draw_rect(self, x, y):
         move_x = x * self.speed
@@ -37,6 +55,15 @@ class Tank(object):
                 f'X={move_x} Y={move_y} '
                 f'lb={self.left_border} rb={self.right_border} hb={self.head_border} fb={self.foot_border}'
             )
+
+        if y == -1:
+            self.player_sprite = self.player_sprite_W
+        elif x == 1:
+            self.player_sprite = self.player_sprite_D
+        elif x == -1:
+            self.player_sprite = self.player_sprite_A
+        elif y == 1:
+            self.player_sprite = self.player_sprite_S
 
         # IF a collision then stop
         if self.head_border < 0:
@@ -61,3 +88,4 @@ class Tank(object):
 
         self.rectangle = self.rectangle.move(move_x, move_y)
         pygame.draw.rect(self.screen, (255, 255, 0), self.rectangle)
+        self.screen.blit(self.player_sprite, self.rectangle)
