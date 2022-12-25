@@ -17,7 +17,7 @@ class Barrier:
                                           (self.pointX, self.pointY, self.wight, self.height))
 
     def get_block_pixels(self):
-        return self.pointX, self.pointY
+        return self.pointX, self.pointY, self.pointX + self.wight, self.height + self.pointY
 
 
 class Wall(Barrier):
