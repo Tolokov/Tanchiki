@@ -104,32 +104,32 @@ class GameWindow:
         self.create_player()
 
         # Walls
-        self.create_wall(x=250, y=400)
-        self.create_wall(x=200, y=450)
-        self.create_wall(x=250, y=450)
-        self.create_wall(x=200, y=400)
+        # self.create_wall(x=250, y=400)
+        # self.create_wall(x=200, y=450)
+        # self.create_wall(x=250, y=450)
+        # self.create_wall(x=200, y=400)
 
         # Tree
         self.create_tree(x=650, y=400)
-        self.create_tree(x=600, y=450)
-        self.create_tree(x=650, y=450)
-        self.create_tree(x=600, y=400)
+        # self.create_tree(x=600, y=450)
+        # self.create_tree(x=650, y=450)
+        # self.create_tree(x=600, y=400)
 
         # Water
-        self.create_water(x=250, y=600)
-        self.create_water(x=200, y=650)
-        self.create_water(x=250, y=650)
-        self.create_water(x=200, y=600)
+        # self.create_water(x=250, y=600)
+        # self.create_water(x=200, y=650)
+        # self.create_water(x=250, y=650)
+        # self.create_water(x=200, y=600)
 
         # Base
-        self.create_base(x=250, y=250)
-        self.create_base(x=200, y=200, destroy=True)
+        # self.create_base(x=250, y=250)
+        # self.create_base(x=200, y=200, destroy=True)
 
         # Imp walls
-        self.imp_wall(x=600, y=600)
-        self.imp_wall(x=650, y=650)
-        self.imp_wall(x=650, y=600)
-        self.imp_wall(x=600, y=650)
+        # self.imp_wall(x=600, y=600)
+        # self.imp_wall(x=650, y=650)
+        # self.imp_wall(x=650, y=600)
+        # self.imp_wall(x=600, y=650)
 
 
 if "__main__" == __name__:

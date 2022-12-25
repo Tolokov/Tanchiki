@@ -48,7 +48,15 @@ class Tank(object):
         move_x = x * self.speed
         move_y = y * self.speed
 
+        s_x = self.rectangle.x
+        s_y = self.rectangle.y
+
         # Find window borders
+        temp_left_border = self.left_border
+        temp_head_border = self.head_border
+        temp_right_border = self.right_border
+        temp_foot_border = self.foot_border
+
         self.left_border += move_x
         self.right_border -= move_x
         self.head_border += move_y
@@ -56,26 +64,43 @@ class Tank(object):
 
         if environ['DEBUG'] == 'true':
             print(
-                f'X={move_x} Y={move_y} '
+                # f'X={move_x} Y={move_y} '
                 f'lb={self.left_border} rb={self.right_border} hb={self.head_border} fb={self.foot_border}'
             )
 
+
         if y == -1:
             self.player_sprite = self.player_sprite_W
+            # for i, j in self.bp:
+            #     print(i, j)
+            #
+            #     if self.left_border == i and self.foot_border == j:
+            #         move_y = 0
+            #         self.left_border = temp_left_border
+            #         self.head_border = temp_head_border
+            #         self.right_border = temp_right_border
+            #         self.foot_border = temp_foot_border
         elif x == 1:
             self.player_sprite = self.player_sprite_D
+            for i, j, k, l in self.bp:
+                print(i, j, k, l)
+                if (self.left_border + 25 == i and self.head_border == j) \
+                        or (self.left_border + 25 == i and self.head_border + 25 == j) or \
+                        (self.left_border + 25 == i and self.head_border - 25) == j \
+                        :
+                    move_x = 0
+                    self.left_border = temp_left_border
+                    self.head_border = temp_head_border
+                    self.right_border = temp_right_border
+                    self.foot_border = temp_foot_border
+
         elif x == -1:
             self.player_sprite = self.player_sprite_A
+
         elif y == 1:
             self.player_sprite = self.player_sprite_S
 
         # IF a collision then stop
-        s_x = self.rectangle.x
-        s_y = self.rectangle.y
-        for x, y in self.bp:
-            if s_x == x:
-                print(' ')
-
         if self.head_border < 0:
             move_x, move_y = 0, 0
             self.head_border = 0
@@ -96,10 +121,6 @@ class Tank(object):
             self.left_border = 0
             self.right_border = self.border[1] - self.height
 
-        # print(self.bp)
-
-
-
 
         self.rectangle = self.rectangle.move(move_x, move_y)
         pygame.draw.rect(self.screen, self.bg_color, self.rectangle)
@@ -108,38 +129,38 @@ class Tank(object):
     def controller(self, event):
         # Up key
         if event.key == pygame.K_w or event.key == pygame.K_UP:
-            if environ['DEBUG'] == 'true':
-                print('UP')
+            # if environ['DEBUG'] == 'true':
+            #     print('UP')
             self.draw_rect(0, -1)
 
         # Down key
         elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
-            if environ['DEBUG'] == 'true':
-                print('LEFT')
+            # if environ['DEBUG'] == 'true':
+            #     print('LEFT')
             self.draw_rect(-1, 0)
 
         # Left key
         elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
-            if environ['DEBUG'] == 'true':
-                print('DOWN')
+            # if environ['DEBUG'] == 'true':
+            #     print('DOWN')
             self.draw_rect(0, 1)
 
         # Right key
         elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
-            if environ['DEBUG'] == 'true':
-                print('RIGHT')
+            # if environ['DEBUG'] == 'true':
+            #     print('RIGHT')
             self.draw_rect(1, 0)
 
         # Shoot key
         elif event.key == pygame.K_SPACE or event.key == pygame.K_z:
-            if environ['DEBUG'] == 'true':
-                print('Z')
+            # if environ['DEBUG'] == 'true':
+            #     print('Z')
                 self.draw_rect(0, 0)
 
         # Pause key
         elif event.key == pygame.K_PAUSE:
-            if environ['DEBUG'] == 'true':
-                print('PAUSE')
+            # if environ['DEBUG'] == 'true':
+            #     print('PAUSE')
                 self.draw_rect(0, 0)
 
         # Enter key
