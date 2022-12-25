@@ -2,6 +2,7 @@ import pygame
 from os import environ
 
 from system.tank import Tank
+from system.objects import Wall
 
 # Debug mod ON=true OFF=false
 environ['DEBUG'] = 'true'
@@ -48,6 +49,9 @@ class GameWindow:
                 if event.type == pygame.KEYDOWN:
                     self.screen.fill(self.background_color)
                     self.player.controller(event)
+                for obj in self.objects:
+                    obj.draw_rect()
+
 
             # Display update
             pygame.display.update()
@@ -61,11 +65,21 @@ class GameWindow:
         self.screen.fill(self.background_color)
 
         # Game configure
-        self.create_player()
+        if environ['DEBUG'] == 'true':
+            self.create_player()
+            self.create_wall(x=300, y=300)
+            self.create_wall(x=350, y=350)
+            self.create_wall(x=300, y=350)
+            self.create_wall(x=350, y=300)
+
         self.build()
 
     def create_player(self):
         self.player = Tank(self.screen, self.display_size, self.background_color)
+
+    def create_wall(self, x, y):
+        self.wall = Wall(self.screen, self.display_size, self.background_color, x, y)
+        self.objects.append(self.wall)
 
 
 if "__main__" == __name__:
