@@ -11,8 +11,8 @@ class Tank(object):
         self.bp = block_pixels
 
         # Position
-        self.pointX = int(display_size[0]/2)
-        self.pointY = int(display_size[0]/2)
+        self.pointX = int(display_size[0] / 2)
+        self.pointY = int(display_size[0] / 2)
         self.wight = 50
         self.height = 50
         self.rectangle = pygame.draw.rect(self.screen, self.bg_color,
@@ -48,40 +48,40 @@ class Tank(object):
         move_x = x * self.speed
         move_y = y * self.speed
 
-        s_x = self.rectangle.x
-        s_y = self.rectangle.y
-
         # Find window borders
         temp_left_border = self.left_border
         temp_head_border = self.head_border
         temp_right_border = self.right_border
         temp_foot_border = self.foot_border
 
+        # Border calculate
         self.left_border += move_x
         self.right_border -= move_x
         self.head_border += move_y
         self.foot_border -= move_y
 
         # if environ['DEBUG'] == 'true':
-            # print(
-            #     f'X={move_x} Y={move_y} '
-            #     f'lb={self.left_border} rb={self.right_border} hb={self.head_border} fb={self.foot_border}'
-            # )
+        # print(
+        #     f'X={move_x} Y={move_y} '
+        #     f'lb={self.left_border} rb={self.right_border} hb={self.head_border} fb={self.foot_border}'
+        # )
 
+        def return_self_borders():
+            self.left_border = temp_left_border
+            self.head_border = temp_head_border
+            self.right_border = temp_right_border
+            self.foot_border = temp_foot_border
 
+        # Collision
         if y == -1:
             self.player_sprite = self.player_sprite_W
             for i, j, k, l in self.bp:
                 print(i, j, k, l)
-                if (self.left_border - 25 == i and self.head_border - 25 == j)\
-                    or (self.left_border == i and self.head_border - 25 == j)\
+                if (self.left_border - 25 == i and self.head_border - 25 == j) \
+                        or (self.left_border == i and self.head_border - 25 == j) \
                         or (self.left_border + 25 == i and self.head_border - 25 == j):
-
                     move_y = 0
-                    self.left_border = temp_left_border
-                    self.head_border = temp_head_border
-                    self.right_border = temp_right_border
-                    self.foot_border = temp_foot_border
+                    return_self_borders()
 
         elif x == 1:
             self.player_sprite = self.player_sprite_D
@@ -89,13 +89,9 @@ class Tank(object):
                 print(i, j, k, l)
                 if (self.left_border + 25 == i and self.head_border == j) \
                         or (self.left_border + 25 == i and self.head_border + 25 == j) or \
-                        (self.left_border + 25 == i and self.head_border - 25) == j \
-                        :
+                        (self.left_border + 25 == i and self.head_border - 25) == j:
                     move_x = 0
-                    self.left_border = temp_left_border
-                    self.head_border = temp_head_border
-                    self.right_border = temp_right_border
-                    self.foot_border = temp_foot_border
+                    return_self_borders()
 
         elif x == -1:
             self.player_sprite = self.player_sprite_A
@@ -103,28 +99,19 @@ class Tank(object):
                 print(i, j, k, l)
                 if (self.left_border - 25 == i and self.head_border == j) \
                         or (self.left_border - 25 == i and self.head_border - 25 == j) or \
-                        (self.left_border - 25 == i and self.head_border + 25) == j \
-                        :
+                        (self.left_border - 25 == i and self.head_border + 25) == j:
                     move_x = 0
-                    self.left_border = temp_left_border
-                    self.head_border = temp_head_border
-                    self.right_border = temp_right_border
-                    self.foot_border = temp_foot_border
-
+                    return_self_borders()
 
         elif y == 1:
             self.player_sprite = self.player_sprite_S
             for i, j, k, l in self.bp:
                 print(i, j, k, l)
-                if (self.left_border - 25 == i and self.head_border + 25 == j)\
-                    or (self.left_border == i and self.head_border + 25 == j)\
+                if (self.left_border - 25 == i and self.head_border + 25 == j) \
+                        or (self.left_border == i and self.head_border + 25 == j) \
                         or (self.left_border + 25 == i and self.head_border + 25 == j):
-
                     move_y = 0
-                    self.left_border = temp_left_border
-                    self.head_border = temp_head_border
-                    self.right_border = temp_right_border
-                    self.foot_border = temp_foot_border
+                    return_self_borders()
 
         # IF a collision then stop
         if self.head_border < 0:
@@ -146,7 +133,6 @@ class Tank(object):
             move_x, move_y = 0, 0
             self.left_border = 0
             self.right_border = self.border[1] - self.height
-
 
         self.rectangle = self.rectangle.move(move_x, move_y)
         pygame.draw.rect(self.screen, self.bg_color, self.rectangle)
@@ -181,18 +167,18 @@ class Tank(object):
         elif event.key == pygame.K_SPACE or event.key == pygame.K_z:
             # if environ['DEBUG'] == 'true':
             #     print('Z')
-                self.draw_rect(0, 0)
+            self.draw_rect(0, 0)
 
         # Pause key
         elif event.key == pygame.K_PAUSE:
             # if environ['DEBUG'] == 'true':
             #     print('PAUSE')
-                self.draw_rect(0, 0)
+            self.draw_rect(0, 0)
 
         # Enter key
         elif event.key == pygame.K_RETURN:
-            if environ['DEBUG'] == 'true':
-                print('K_RETURN')
-                self.draw_rect(0, 0)
+            # if environ['DEBUG'] == 'true':
+            #     print('K_RETURN')
+            self.draw_rect(0, 0)
         else:
             self.draw_rect(0, 0)
