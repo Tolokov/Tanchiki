@@ -21,8 +21,8 @@ class Wall(Barrier):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.hp = 1
-        self.wall_sprite = pygame.image.load(r"..\images\bricks.png")
-        self.wall_sprite = pygame.transform.scale(self.wall_sprite, (self.wight, self.height))
+        sprite = pygame.image.load(r"..\images\bricks.png")
+        self.wall_sprite = pygame.transform.scale(sprite, (self.wight, self.height))
 
     def draw_rect(self):
         self.screen.blit(self.wall_sprite, self.rectangle)
@@ -31,8 +31,20 @@ class Wall(Barrier):
 class Tree(Barrier):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.wall_sprite = pygame.image.load(r"..\images\Tree.png").convert_alpha()
-        self.wall_sprite = pygame.transform.scale(self.wall_sprite, (self.wight, self.height))
+        sprite = pygame.image.load(r"..\images\Tree.png").convert_alpha()
+        self.tree_sprite = pygame.transform.scale(sprite, (self.wight, self.height))
 
     def draw_rect(self):
-        self.screen.blit(self.wall_sprite, self.rectangle)
+        self.screen.blit(self.tree_sprite, self.rectangle)
+
+
+class Water(Barrier):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        sprite = pygame.image.load(r"..\images\Water.png").convert_alpha()
+        self.water_sprite = pygame.transform.scale(sprite, (self.wight, self.height))
+
+    def draw_rect(self):
+        self.screen.blit(self.water_sprite, self.rectangle)
+
+

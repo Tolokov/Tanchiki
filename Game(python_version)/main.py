@@ -83,6 +83,11 @@ class GameWindow:
         tree = Tree(self.screen, self.display_size, self.background_color, x, y)
         self.objects.append(tree)
 
+    def create_water(self, x, y):
+        water = Water(self.screen, self.display_size, self.background_color, x, y)
+        self.objects.append(water)
+
+
     def TEST_LEVEL(self):
         self.create_player()
 
@@ -97,6 +102,12 @@ class GameWindow:
         self.create_tree(x=600, y=450)
         self.create_tree(x=650, y=450)
         self.create_tree(x=600, y=400)
+
+        # # Water
+        self.create_water(x=250, y=600)
+        self.create_water(x=200, y=650)
+        self.create_water(x=250, y=650)
+        self.create_water(x=200, y=600)
 
 
 if "__main__" == __name__:
