@@ -48,3 +48,17 @@ class Water(Barrier):
         self.screen.blit(self.water_sprite, self.rectangle)
 
 
+class Base(Barrier):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.hp = 1
+        sprite = pygame.image.load(r"..\images\base.png").convert_alpha()
+        self.base_sprite = pygame.transform.scale(sprite, (self.wight, self.height))
+
+    def draw_rect(self):
+        self.screen.blit(self.base_sprite, self.rectangle)
+
+    def destroy(self):
+        sprite = pygame.image.load(r"..\images\base_des.png").convert_alpha()
+        self.base_sprite = pygame.transform.scale(sprite, (self.wight, self.height))
+        self.draw_rect()

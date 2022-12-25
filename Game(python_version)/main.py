@@ -12,7 +12,7 @@ class GameWindow:
     def __init__(self):
         self.path_to_logo = '..\images\icon.png'
         self.display_size = (900, 900)
-        self.background_color = (105, 105, 105)
+        self.background_color = (10, 10, 10)
         self.title = 'Tanchiki'
         self.status_run = True
         self.clock = pygame.time.Clock()
@@ -87,6 +87,12 @@ class GameWindow:
         water = Water(self.screen, self.display_size, self.background_color, x, y)
         self.objects.append(water)
 
+    def create_base(self, x, y, destroy=False):
+        base = Base(self.screen, self.display_size, self.background_color, x, y)
+        self.objects.append(base)
+        if destroy:
+            base.destroy()
+
 
     def TEST_LEVEL(self):
         self.create_player()
@@ -108,6 +114,9 @@ class GameWindow:
         self.create_water(x=200, y=650)
         self.create_water(x=250, y=650)
         self.create_water(x=200, y=600)
+
+        self.create_base(x=250, y=250)
+        self.create_base(x=200, y=200, destroy=True)
 
 
 if "__main__" == __name__:
