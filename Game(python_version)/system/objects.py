@@ -62,3 +62,14 @@ class Base(Barrier):
         sprite = pygame.image.load(r"..\images\base_des.png").convert_alpha()
         self.base_sprite = pygame.transform.scale(sprite, (self.wight, self.height))
         self.draw_rect()
+
+
+class ImpenetrableWalls(Barrier):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.hp = 1
+        sprite = pygame.image.load(r"..\images\Wall.png").convert_alpha()
+        self.wall_sprite = pygame.transform.scale(sprite, (self.wight, self.height))
+
+    def draw_rect(self):
+        self.screen.blit(self.wall_sprite, self.rectangle)
