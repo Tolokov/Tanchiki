@@ -14,7 +14,8 @@ class Tank(object):
         self.pointY = 500
         self.wight = 50
         self.height = 50
-        self.rectangle = pygame.draw.rect(self.screen, self.bg_color, (self.pointX, self.pointY, self.wight, self.height))
+        self.rectangle = pygame.draw.rect(self.screen, self.bg_color,
+                                          (self.pointX, self.pointY, self.wight, self.height))
         self.speed = 25
 
         # Player image
@@ -91,3 +92,48 @@ class Tank(object):
         self.rectangle = self.rectangle.move(move_x, move_y)
         pygame.draw.rect(self.screen, self.bg_color, self.rectangle)
         self.screen.blit(self.player_sprite, self.rectangle)
+
+    def controller(self, event):
+        # Up key
+        if event.key == pygame.K_w or event.key == pygame.K_UP:
+            if environ['DEBUG'] == 'true':
+                print('UP')
+            self.draw_rect(0, -1)
+
+        # Down key
+        elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
+            if environ['DEBUG'] == 'true':
+                print('LEFT')
+            self.draw_rect(-1, 0)
+
+        # Left key
+        elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
+            if environ['DEBUG'] == 'true':
+                print('DOWN')
+            self.draw_rect(0, 1)
+
+        # Right key
+        elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+            if environ['DEBUG'] == 'true':
+                print('RIGHT')
+            self.draw_rect(1, 0)
+
+        # Shoot key
+        elif event.key == pygame.K_SPACE or event.key == pygame.K_z:
+            if environ['DEBUG'] == 'true':
+                print('Z')
+                self.draw_rect(0, 0)
+
+        # Pause key
+        elif event.key == pygame.K_PAUSE:
+            if environ['DEBUG'] == 'true':
+                print('PAUSE')
+                self.draw_rect(0, 0)
+
+        # Enter key
+        elif event.key == pygame.K_RETURN:
+            if environ['DEBUG'] == 'true':
+                print('K_RETURN')
+                self.draw_rect(0, 0)
+        else:
+            self.draw_rect(0, 0)

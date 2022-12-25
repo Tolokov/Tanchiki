@@ -1,7 +1,6 @@
 import pygame
 from os import environ
 
-from system.keyboard import controller
 from system.tank import Tank
 
 # Debug mod ON=true OFF=false
@@ -47,9 +46,8 @@ class GameWindow:
 
                 # Move buttons
                 if event.type == pygame.KEYDOWN:
-                    for obj in self.objects:
-                        self.screen.fill(self.background_color)
-                        controller(event, obj)
+                    self.screen.fill(self.background_color)
+                    self.player.controller(event)
 
             # Display update
             pygame.display.update()
@@ -67,8 +65,7 @@ class GameWindow:
         self.build()
 
     def create_player(self):
-        player = Tank(self.screen, self.display_size, self.background_color)
-        self.objects.append(player)
+        self.player = Tank(self.screen, self.display_size, self.background_color)
 
 
 if "__main__" == __name__:
