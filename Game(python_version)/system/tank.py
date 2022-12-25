@@ -62,24 +62,27 @@ class Tank(object):
         self.head_border += move_y
         self.foot_border -= move_y
 
-        if environ['DEBUG'] == 'true':
-            print(
-                # f'X={move_x} Y={move_y} '
-                f'lb={self.left_border} rb={self.right_border} hb={self.head_border} fb={self.foot_border}'
-            )
+        # if environ['DEBUG'] == 'true':
+            # print(
+            #     f'X={move_x} Y={move_y} '
+            #     f'lb={self.left_border} rb={self.right_border} hb={self.head_border} fb={self.foot_border}'
+            # )
 
 
         if y == -1:
             self.player_sprite = self.player_sprite_W
-            # for i, j in self.bp:
-            #     print(i, j)
-            #
-            #     if self.left_border == i and self.foot_border == j:
-            #         move_y = 0
-            #         self.left_border = temp_left_border
-            #         self.head_border = temp_head_border
-            #         self.right_border = temp_right_border
-            #         self.foot_border = temp_foot_border
+            for i, j, k, l in self.bp:
+                print(i, j, k, l)
+                if (self.left_border - 25 == i and self.head_border - 25 == j)\
+                    or (self.left_border == i and self.head_border - 25 == j)\
+                        or (self.left_border + 25 == i and self.head_border - 25 == j):
+
+                    move_y = 0
+                    self.left_border = temp_left_border
+                    self.head_border = temp_head_border
+                    self.right_border = temp_right_border
+                    self.foot_border = temp_foot_border
+
         elif x == 1:
             self.player_sprite = self.player_sprite_D
             for i, j, k, l in self.bp:
@@ -96,9 +99,32 @@ class Tank(object):
 
         elif x == -1:
             self.player_sprite = self.player_sprite_A
+            for i, j, k, l in self.bp:
+                print(i, j, k, l)
+                if (self.left_border - 25 == i and self.head_border == j) \
+                        or (self.left_border - 25 == i and self.head_border - 25 == j) or \
+                        (self.left_border - 25 == i and self.head_border + 25) == j \
+                        :
+                    move_x = 0
+                    self.left_border = temp_left_border
+                    self.head_border = temp_head_border
+                    self.right_border = temp_right_border
+                    self.foot_border = temp_foot_border
+
 
         elif y == 1:
             self.player_sprite = self.player_sprite_S
+            for i, j, k, l in self.bp:
+                print(i, j, k, l)
+                if (self.left_border - 25 == i and self.head_border + 25 == j)\
+                    or (self.left_border == i and self.head_border + 25 == j)\
+                        or (self.left_border + 25 == i and self.head_border + 25 == j):
+
+                    move_y = 0
+                    self.left_border = temp_left_border
+                    self.head_border = temp_head_border
+                    self.right_border = temp_right_border
+                    self.foot_border = temp_foot_border
 
         # IF a collision then stop
         if self.head_border < 0:
