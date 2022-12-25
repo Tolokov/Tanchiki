@@ -40,6 +40,9 @@ class Tree(Barrier):
     def draw_rect(self):
         self.screen.blit(self.tree_sprite, self.rectangle)
 
+    def get_block_pixels(self):
+        return 10000, 10000, 10000, 10000
+
 
 class Water(Barrier):
     def __init__(self, *args, **kwargs):
