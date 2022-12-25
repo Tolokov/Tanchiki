@@ -10,8 +10,8 @@ class Tank(object):
         self.bg_color = bg_color
 
         # Position
-        self.pointX = 500
-        self.pointY = 500
+        self.pointX = int(display_size[0]/2)
+        self.pointY = int(display_size[0]/2)
         self.wight = 50
         self.height = 50
         self.rectangle = pygame.draw.rect(self.screen, self.bg_color,

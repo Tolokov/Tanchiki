@@ -11,7 +11,7 @@ environ['DEBUG'] = 'true'
 class GameWindow:
     def __init__(self):
         self.path_to_logo = '..\images\icon.png'
-        self.display_size = (1000, 1000)
+        self.display_size = (900, 900)
         self.background_color = (105, 105, 105)
         self.title = 'Tanchiki'
         self.status_run = True
@@ -51,7 +51,10 @@ class GameWindow:
                     self.player.controller(event)
                 for obj in self.objects:
                     obj.draw_rect()
-
+                # if environ['DEBUG'] == 'true':
+                #     if pygame.mouse.get_focused():
+                #         pos = pygame.mouse.get_pos()
+                #         print(pos)
 
             # Display update
             pygame.display.update()
@@ -67,10 +70,10 @@ class GameWindow:
         # Game configure
         if environ['DEBUG'] == 'true':
             self.create_player()
-            self.create_wall(x=300, y=300)
-            self.create_wall(x=350, y=350)
-            self.create_wall(x=300, y=350)
-            self.create_wall(x=350, y=300)
+            self.create_wall(x=250, y=400)
+            self.create_wall(x=200, y=450)
+            self.create_wall(x=250, y=450)
+            self.create_wall(x=200, y=400)
 
         self.build()
 
