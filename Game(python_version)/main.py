@@ -19,6 +19,8 @@ class GameWindow:
         self.fps = 60
         self.screen = None
         self.objects = list()
+        self.block_pixels = list()
+        self.player = None
 
     def set_icon(self):
         # Icon
@@ -38,7 +40,6 @@ class GameWindow:
         # Infinite loop
         while self.status_run:
             for event in pygame.event.get():
-
                 # Quit buttons
                 if event.type == pygame.QUIT:
                     self.status_run = False
@@ -51,10 +52,10 @@ class GameWindow:
                     self.player.controller(event)
                 for obj in self.objects:
                     obj.draw_rect()
-                if environ['DEBUG'] == 'true':
-                    if pygame.mouse.get_focused():
-                        pos = pygame.mouse.get_pos()
-                        print(pos)
+                # if environ['DEBUG'] == 'true':
+                #     if pygame.mouse.get_focused():
+                #         pos = pygame.mouse.get_pos()
+                #         print(pos)
 
             # Display update
             pygame.display.update()
@@ -70,10 +71,12 @@ class GameWindow:
         # Game configure
         if environ['DEBUG'] == 'true':
             self.TEST_LEVEL()
+            for obj in self.objects:
+                self.block_pixels.append(obj.get_block_pixels())
         self.build()
 
     def create_player(self):
-        self.player = Tank(self.screen, self.display_size, self.background_color)
+        self.player = Tank(self.screen, self.display_size, self.background_color, self.block_pixels)
 
     def create_wall(self, x, y):
         wall = Wall(self.screen, self.display_size, self.background_color, x, y)

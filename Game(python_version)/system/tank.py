@@ -3,11 +3,12 @@ from os import environ
 
 
 class Tank(object):
-    def __init__(self, screen, display_size, bg_color):
+    def __init__(self, screen, display_size, bg_color, block_pixels):
         # Get window size
         self.border = display_size
         self.screen = screen
         self.bg_color = bg_color
+        self.bp = block_pixels
 
         # Position
         self.pointX = int(display_size[0]/2)
@@ -69,6 +70,12 @@ class Tank(object):
             self.player_sprite = self.player_sprite_S
 
         # IF a collision then stop
+        s_x = self.rectangle.x
+        s_y = self.rectangle.y
+        for x, y in self.bp:
+            if s_x == x:
+                print(' ')
+
         if self.head_border < 0:
             move_x, move_y = 0, 0
             self.head_border = 0
@@ -88,6 +95,11 @@ class Tank(object):
             move_x, move_y = 0, 0
             self.left_border = 0
             self.right_border = self.border[1] - self.height
+
+        # print(self.bp)
+
+
+
 
         self.rectangle = self.rectangle.move(move_x, move_y)
         pygame.draw.rect(self.screen, self.bg_color, self.rectangle)

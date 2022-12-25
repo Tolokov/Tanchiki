@@ -16,6 +16,9 @@ class Barrier:
         self.rectangle = pygame.draw.rect(self.screen, self.bg_color,
                                           (self.pointX, self.pointY, self.wight, self.height))
 
+    def get_block_pixels(self):
+        return self.pointX, self.pointY
+
 
 class Wall(Barrier):
     def __init__(self, *args, **kwargs):
