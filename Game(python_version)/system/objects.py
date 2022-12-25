@@ -28,3 +28,11 @@ class Wall(Barrier):
         self.screen.blit(self.wall_sprite, self.rectangle)
 
 
+class Tree(Barrier):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.wall_sprite = pygame.image.load(r"..\images\Tree.png").convert_alpha()
+        self.wall_sprite = pygame.transform.scale(self.wall_sprite, (self.wight, self.height))
+
+    def draw_rect(self):
+        self.screen.blit(self.wall_sprite, self.rectangle)

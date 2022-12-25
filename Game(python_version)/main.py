@@ -2,7 +2,7 @@ import pygame
 from os import environ
 
 from system.tank import Tank
-from system.objects import Wall
+from system.objects import *
 
 # Debug mod ON=true OFF=false
 environ['DEBUG'] = 'true'
@@ -51,10 +51,10 @@ class GameWindow:
                     self.player.controller(event)
                 for obj in self.objects:
                     obj.draw_rect()
-                # if environ['DEBUG'] == 'true':
-                #     if pygame.mouse.get_focused():
-                #         pos = pygame.mouse.get_pos()
-                #         print(pos)
+                if environ['DEBUG'] == 'true':
+                    if pygame.mouse.get_focused():
+                        pos = pygame.mouse.get_pos()
+                        print(pos)
 
             # Display update
             pygame.display.update()
@@ -69,20 +69,34 @@ class GameWindow:
 
         # Game configure
         if environ['DEBUG'] == 'true':
-            self.create_player()
-            self.create_wall(x=250, y=400)
-            self.create_wall(x=200, y=450)
-            self.create_wall(x=250, y=450)
-            self.create_wall(x=200, y=400)
-
+            self.TEST_LEVEL()
         self.build()
 
     def create_player(self):
         self.player = Tank(self.screen, self.display_size, self.background_color)
 
     def create_wall(self, x, y):
-        self.wall = Wall(self.screen, self.display_size, self.background_color, x, y)
-        self.objects.append(self.wall)
+        wall = Wall(self.screen, self.display_size, self.background_color, x, y)
+        self.objects.append(wall)
+
+    def create_tree(self, x, y):
+        tree = Tree(self.screen, self.display_size, self.background_color, x, y)
+        self.objects.append(tree)
+
+    def TEST_LEVEL(self):
+        self.create_player()
+
+        # Wall
+        self.create_wall(x=250, y=400)
+        self.create_wall(x=200, y=450)
+        self.create_wall(x=250, y=450)
+        self.create_wall(x=200, y=400)
+
+        # Tree
+        self.create_tree(x=650, y=400)
+        self.create_tree(x=600, y=450)
+        self.create_tree(x=650, y=450)
+        self.create_tree(x=600, y=400)
 
 
 if "__main__" == __name__:
