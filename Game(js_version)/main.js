@@ -1,6 +1,6 @@
-let map = `#########################
+let map = {test : `#########################
 #########################
-###@@@@@@@@##@@@@@@@@@###
+###@@@@@@@@###@@@@@@@@###
 ####@###############@####
 ####@###############@####
 ####@###############@####
@@ -18,12 +18,12 @@ let map = `#########################
 ######@###########@######
 #########################
 #########################
-#########################
+########@#######@########
 @@@@@@@@@@#####@@@@@@@@@@
+#######@#########@#######
+#######@#########@#######
 #########################
-#########################
-#########################
-`
+`}
 const size = 32;
 let cvs = document.getElementById("canvas");
 let ctx = cvs.getContext("2d");
@@ -138,12 +138,14 @@ class projectile {
             this._sprite = bulletD;
             this.move(1, 0);
         }
-        /*for (let col = 0; col < 26; col++)
+        for (let col = 0; col < 26; col++)
             for (let row = 0; row < 26; row++)
-                if (map[col * 26 + row] == "@") {
-                    if (col * 32 + 32 > this.getYpos() && row * 32 + 32 > this.getXpos() && col * 32 < this.getYpos() && row * 32 - 32 < this.getXpos())
-                        return map.replaceAt(col * 26 + row, "#");
-                }*/
+                if (map.test[col * 26 + row] == "@") {
+                    if (col * 32 + 32 > this.getYpos() && row * 32 + 30 > this.getXpos() && col * 32 - 5 < this.getYpos() && row * 32 - 10 < this.getXpos()) {
+                        map.test = map.test.replaceAt(col * 26 + row, "#");
+                        delete this._speed;
+                    }
+                }
     }
 
 }
@@ -199,7 +201,7 @@ function draw() {
     }
     ctx.drawImage(user._sprite, user.getXpos(), user.getYpos(), 32, 32);
     let i = 0, j = 0;
-    for (let  char of map) {
+    for (let  char of map.test) {
         if (char == "@") {
             ctx.drawImage(brick, i * size, j * size);
         }
@@ -209,7 +211,6 @@ function draw() {
             i = 0;
         }
     }
-    map = map.replaceAt(2 * 26 + 2, "@");
     if (user.getYpos() > 800 - 32)
         user.setpos(user.getXpos(), user.getYpos() - user.getSpeed());
     if (user.getYpos() < 0)
@@ -220,7 +221,7 @@ function draw() {
         user.setpos(user.getXpos() + user.getSpeed(), user.getYpos());
     for (let col = 0; col < 26; col++)
         for (let row = 0; row < 26; row++)
-            if (map[col * 26 + row] == "@") {
+            if (map.test[col * 26 + row] == "@") {
                 if (user.getDirection() == "w")
                     if (col * 32 + 32 > user.getYpos() && row * 32 + 32 > user.getXpos() && col * 32 < user.getYpos() && row * 32 - 32 < user.getXpos())
                         user.setpos(user.getXpos(), user.getYpos() + user.getSpeed());
