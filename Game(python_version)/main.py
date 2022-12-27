@@ -1,7 +1,7 @@
 import pygame
 from os import environ
 
-from system.tank import Tank
+from system.tank import *
 from system.objects import *
 
 # Debug mod ON=true OFF=false
@@ -21,6 +21,7 @@ class GameWindow:
         self.objects = list()
         self.block_pixels = list()
         self.player = None
+        self.enemy = None
 
     def set_icon(self):
         # Icon
@@ -50,12 +51,13 @@ class GameWindow:
                 if event.type == pygame.KEYDOWN:
                     self.screen.fill(self.background_color)
                     self.player.controller(event)
+                    self.enemy.controller()
                 for obj in self.objects:
                     obj.draw_rect()
                 # if environ['DEBUG'] == 'true':
-                #     if pygame.mouse.get_focused():
-                #         pos = pygame.mouse.get_pos()
-                #         print(pos)
+                    # if pygame.mouse.get_focused():
+                    #     pos = pygame.mouse.get_pos()
+                    #     print(pos)
 
             # Display update
             pygame.display.update()
@@ -77,6 +79,9 @@ class GameWindow:
 
     def create_player(self):
         self.player = Tank(self.screen, self.display_size, self.background_color, self.block_pixels)
+
+    def create_enemy(self):
+        self.enemy = Enemy(self.screen, self.display_size, self.background_color, self.block_pixels)
 
     def create_wall(self, x, y):
         wall = Wall(self.screen, self.display_size, self.background_color, x, y)
@@ -102,6 +107,7 @@ class GameWindow:
 
     def TEST_LEVEL(self):
         self.create_player()
+        self.create_enemy()
 
         # Walls
         self.create_wall(x=250, y=400)
