@@ -49,10 +49,10 @@ class Tank(object):
         self.player_sprite = self.player_sprite_W
 
         # Calculated border values
-        self.head_border = self.border[0] - self.pointX
-        self.foot_border = self.border[0] - self.pointX - self.height
-        self.left_border = self.border[1] - self.pointY
-        self.right_border = self.border[1] - self.pointY - self.wight
+        self.head_border = self.pointY
+        self.foot_border = self.border[1] - (self.wight + self.pointY)
+        self.left_border = self.pointX
+        self.right_border = self.border[0] - (self.wight + self.pointX)
 
         # Draw player image
         self.screen.blit(self.player_sprite_W, self.rectangle)
@@ -264,10 +264,16 @@ class Enemy1:
         self.player_sprite = self.player_sprite_W
 
         # Calculated border values
-        self.head_border = self.border[0] - self.pointX
-        self.foot_border = self.border[0] - self.pointX - self.height
-        self.left_border = self.border[1] - self.pointY
-        self.right_border = self.border[1] - self.pointY - self.wight
+        self.head_border = self.pointY
+        self.foot_border = self.border[1] - (self.wight + self.pointY)
+        self.left_border = self.pointX
+        self.right_border = self.border[0] - (self.wight + self.pointX)
+
+        # if environ['DEBUG'] == 'true':
+        #     print(
+        #         f'lb={self.left_border} rb={self.right_border} '
+        #         f'hb={self.head_border} fb={self.foot_border}'
+        #         )
 
         # Draw player image
         self.screen.blit(self.player_sprite_W, self.rectangle)
@@ -418,10 +424,10 @@ class Enemy2:
         self.player_sprite = self.player_sprite_W
 
         # Calculated border values
-        self.head_border = self.border[0] - self.pointX
-        self.foot_border = self.border[0] - self.pointX - self.height
-        self.left_border = self.border[1] - self.pointY
-        self.right_border = self.border[1] - self.pointY - self.wight
+        self.head_border = self.pointY
+        self.foot_border = self.border[1] - (self.wight + self.pointY)
+        self.left_border = self.pointX
+        self.right_border = self.border[0] - (self.wight + self.pointX)
 
         # Draw player image
         self.screen.blit(self.player_sprite_W, self.rectangle)
@@ -515,16 +521,15 @@ class Enemy2:
         self.screen.blit(self.player_sprite, self.rectangle)
 
     def controller(self):
-        t = int(random.randrange(9999))
+        t = int(time.monotonic() + 1)
         if t % 5 == 0:
-            self.draw_rect(1, 0)
-        elif t % 3 == 0:
-            self.draw_rect(0, -1)
-        elif t % 2 == 0:
             self.draw_rect(-1, 0)
-        else:
+        elif t % 3 == 0:
+            self.draw_rect(1, 0)
+        elif t % 2 == 0:
             self.draw_rect(0, 1)
-
+        else:
+            self.draw_rect(0, -1)
 
 
 class Enemy3:
@@ -573,10 +578,10 @@ class Enemy3:
         self.player_sprite = self.player_sprite_W
 
         # Calculated border values
-        self.head_border = self.border[0] - self.pointX
-        self.foot_border = self.border[0] - self.pointX - self.height
-        self.left_border = self.border[1] - self.pointY
-        self.right_border = self.border[1] - self.pointY - self.wight
+        self.head_border = self.pointY
+        self.foot_border = self.border[1] - (self.wight + self.pointY)
+        self.left_border = self.pointX
+        self.right_border = self.border[0] - (self.wight + self.pointX)
 
         # Draw player image
         self.screen.blit(self.player_sprite_W, self.rectangle)
@@ -670,12 +675,13 @@ class Enemy3:
         self.screen.blit(self.player_sprite, self.rectangle)
 
     def controller(self):
-        t = int(random.randrange(9999))
+        t = int(time.monotonic() * 2)
         if t % 5 == 0:
-            self.draw_rect(1, 0)
-        elif t % 3 == 0:
             self.draw_rect(-1, 0)
+        elif t % 3 == 0:
+            self.draw_rect(1, 0)
         elif t % 2 == 0:
-            self.draw_rect(0, -1)
-        else:
             self.draw_rect(0, 1)
+        else:
+            self.draw_rect(0, -1)
+

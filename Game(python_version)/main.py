@@ -12,7 +12,7 @@ class GameWindow:
     def __init__(self):
         self.path_to_logo = '..\images\icon.png'
         self.display_size = (900, 900)
-        self.background_color = (10, 10, 10)
+        self.background_color = (0, 0, 0)
         self.title = 'Tanchiki'
         self.status_run = True
         self.clock = pygame.time.Clock()
