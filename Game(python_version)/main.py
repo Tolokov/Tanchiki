@@ -82,9 +82,9 @@ class GameWindow:
         self.player = Tank(self.screen, self.display_size, self.background_color, self.block_pixels)
 
     def create_enemy(self):
-        self.enemy.append(Enemy1(self.screen, self.display_size, self.background_color, self.block_pixels, 650, 800))
-        self.enemy.append(Enemy2(self.screen, self.display_size, self.background_color, self.block_pixels, 250, 800))
-        self.enemy.append(Enemy3(self.screen, self.display_size, self.background_color, self.block_pixels, 450, 800))
+        self.enemy.append(Enemy1(self.screen, self.display_size, self.background_color, self.block_pixels, 650, 600))
+        self.enemy.append(Enemy2(self.screen, self.display_size, self.background_color, self.block_pixels, 250, 600))
+        self.enemy.append(Enemy3(self.screen, self.display_size, self.background_color, self.block_pixels, 450, 600))
 
     def create_wall(self, x, y):
         wall = Wall(self.screen, self.display_size, self.background_color, x, y)
@@ -113,32 +113,32 @@ class GameWindow:
         self.create_enemy()
 
         # Walls
-        self.create_wall(x=250, y=400)
-        self.create_wall(x=200, y=450)
-        self.create_wall(x=250, y=450)
-        self.create_wall(x=200, y=400)
+        self.create_wall(x=250, y=200)
+        self.create_wall(x=200, y=250)
+        self.create_wall(x=250, y=250)
+        self.create_wall(x=200, y=200)
 
         # Tree
-        self.create_tree(x=650, y=400)
-        self.create_tree(x=600, y=450)
-        self.create_tree(x=650, y=450)
-        self.create_tree(x=600, y=400)
+        self.create_tree(x=650, y=200)
+        self.create_tree(x=600, y=250)
+        self.create_tree(x=650, y=250)
+        self.create_tree(x=600, y=200)
 
         # Water
-        self.create_water(x=250, y=600)
-        self.create_water(x=200, y=650)
-        self.create_water(x=250, y=650)
-        self.create_water(x=200, y=600)
+        self.create_water(x=250, y=400)
+        self.create_water(x=200, y=450)
+        self.create_water(x=250, y=450)
+        self.create_water(x=200, y=400)
 
         # Base
-        self.create_base(x=250, y=250)
-        self.create_base(x=200, y=200, destroy=True)
+        self.create_base(x=250, y=50)
+        self.create_base(x=200, y=50, destroy=True)
 
         # Imp walls
-        self.imp_wall(x=600, y=600)
-        self.imp_wall(x=650, y=650)
-        self.imp_wall(x=650, y=600)
-        self.imp_wall(x=600, y=650)
+        self.imp_wall(x=600, y=400)
+        self.imp_wall(x=650, y=450)
+        self.imp_wall(x=650, y=400)
+        self.imp_wall(x=600, y=450)
 
 
 if "__main__" == __name__:

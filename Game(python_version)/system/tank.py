@@ -1,7 +1,7 @@
 import pygame
 from os import environ
 import time
-
+import random
 
 class Tank(object):
     def __init__(self, screen, display_size, bg_color, block_pixels):
@@ -390,28 +390,28 @@ class Enemy2:
         self.speed = 25
 
         # Player image
-        self.player_sprite_W = pygame.image.load(r"..\images\playerW.png").convert_alpha()
+        self.player_sprite_W = pygame.image.load(r"..\images\green-enemyW.png").convert_alpha()
         self.player_sprite_W = pygame.transform.scale(self.player_sprite_W, (self.wight, self.height))
         self.w_animated = True
-        self.player_sprite_W_2 = pygame.image.load(r"..\images\playerW1.png").convert_alpha()
+        self.player_sprite_W_2 = pygame.image.load(r"..\images\green-enemyW1.png").convert_alpha()
         self.player_sprite_W_2 = pygame.transform.scale(self.player_sprite_W_2, (self.wight, self.height))
 
-        self.player_sprite_A = pygame.image.load(r"..\images\playerA.png").convert_alpha()
+        self.player_sprite_A = pygame.image.load(r"..\images\green-enemyA.png").convert_alpha()
         self.player_sprite_A = pygame.transform.scale(self.player_sprite_A, (self.wight, self.height))
         self.a_animated = True
-        self.player_sprite_A_2 = pygame.image.load(r"..\images\playerA1.png").convert_alpha()
+        self.player_sprite_A_2 = pygame.image.load(r"..\images\green-enemyA1.png").convert_alpha()
         self.player_sprite_A_2 = pygame.transform.scale(self.player_sprite_A_2, (self.wight, self.height))
 
-        self.player_sprite_S = pygame.image.load(r"..\images\playerS.png").convert_alpha()
+        self.player_sprite_S = pygame.image.load(r"..\images\green-enemyS.png").convert_alpha()
         self.player_sprite_S = pygame.transform.scale(self.player_sprite_S, (self.wight, self.height))
         self.s_animated = True
-        self.player_sprite_S_2 = pygame.image.load(r"..\images\playerS1.png").convert_alpha()
+        self.player_sprite_S_2 = pygame.image.load(r"..\images\green-enemyS1.png").convert_alpha()
         self.player_sprite_S_2 = pygame.transform.scale(self.player_sprite_S_2, (self.wight, self.height))
 
-        self.player_sprite_D = pygame.image.load(r"..\images\playerD.png").convert_alpha()
+        self.player_sprite_D = pygame.image.load(r"..\images\green-enemyD.png").convert_alpha()
         self.player_sprite_D = pygame.transform.scale(self.player_sprite_D, (self.wight, self.height))
         self.d_animated = True
-        self.player_sprite_D_2 = pygame.image.load(r"..\images\playerD1.png").convert_alpha()
+        self.player_sprite_D_2 = pygame.image.load(r"..\images\green-enemyD1.png").convert_alpha()
         self.player_sprite_D_2 = pygame.transform.scale(self.player_sprite_D_2, (self.wight, self.height))
 
         # Default direction
@@ -515,15 +515,16 @@ class Enemy2:
         self.screen.blit(self.player_sprite, self.rectangle)
 
     def controller(self):
-        t = int(time.monotonic())
+        t = int(random.randrange(9999))
         if t % 5 == 0:
-            self.draw_rect(-1, 0)
-        elif t % 3 == 0:
             self.draw_rect(1, 0)
-        elif t % 2 == 0:
-            self.draw_rect(0, 1)
-        else:
+        elif t % 3 == 0:
             self.draw_rect(0, -1)
+        elif t % 2 == 0:
+            self.draw_rect(-1, 0)
+        else:
+            self.draw_rect(0, 1)
+
 
 
 class Enemy3:
@@ -544,28 +545,28 @@ class Enemy3:
         self.speed = 25
 
         # Player image
-        self.player_sprite_W = pygame.image.load(r"..\images\playerW.png").convert_alpha()
+        self.player_sprite_W = pygame.image.load(r"..\images\red-enemyW.png").convert_alpha()
         self.player_sprite_W = pygame.transform.scale(self.player_sprite_W, (self.wight, self.height))
         self.w_animated = True
-        self.player_sprite_W_2 = pygame.image.load(r"..\images\playerW1.png").convert_alpha()
+        self.player_sprite_W_2 = pygame.image.load(r"..\images\red-enemyW1.png").convert_alpha()
         self.player_sprite_W_2 = pygame.transform.scale(self.player_sprite_W_2, (self.wight, self.height))
 
-        self.player_sprite_A = pygame.image.load(r"..\images\playerA.png").convert_alpha()
+        self.player_sprite_A = pygame.image.load(r"..\images\red-enemyA.png").convert_alpha()
         self.player_sprite_A = pygame.transform.scale(self.player_sprite_A, (self.wight, self.height))
         self.a_animated = True
-        self.player_sprite_A_2 = pygame.image.load(r"..\images\playerA1.png").convert_alpha()
+        self.player_sprite_A_2 = pygame.image.load(r"..\images\red-enemyA1.png").convert_alpha()
         self.player_sprite_A_2 = pygame.transform.scale(self.player_sprite_A_2, (self.wight, self.height))
 
-        self.player_sprite_S = pygame.image.load(r"..\images\playerS.png").convert_alpha()
+        self.player_sprite_S = pygame.image.load(r"..\images\red-enemyS.png").convert_alpha()
         self.player_sprite_S = pygame.transform.scale(self.player_sprite_S, (self.wight, self.height))
         self.s_animated = True
-        self.player_sprite_S_2 = pygame.image.load(r"..\images\playerS1.png").convert_alpha()
+        self.player_sprite_S_2 = pygame.image.load(r"..\images\red-enemyS1.png").convert_alpha()
         self.player_sprite_S_2 = pygame.transform.scale(self.player_sprite_S_2, (self.wight, self.height))
 
-        self.player_sprite_D = pygame.image.load(r"..\images\playerD.png").convert_alpha()
+        self.player_sprite_D = pygame.image.load(r"..\images\red-enemyD.png").convert_alpha()
         self.player_sprite_D = pygame.transform.scale(self.player_sprite_D, (self.wight, self.height))
         self.d_animated = True
-        self.player_sprite_D_2 = pygame.image.load(r"..\images\playerD1.png").convert_alpha()
+        self.player_sprite_D_2 = pygame.image.load(r"..\images\red-enemyD1.png").convert_alpha()
         self.player_sprite_D_2 = pygame.transform.scale(self.player_sprite_D_2, (self.wight, self.height))
 
         # Default direction
@@ -669,12 +670,12 @@ class Enemy3:
         self.screen.blit(self.player_sprite, self.rectangle)
 
     def controller(self):
-        t = int(time.monotonic())
+        t = int(random.randrange(9999))
         if t % 5 == 0:
-            self.draw_rect(-1, 0)
-        elif t % 3 == 0:
             self.draw_rect(1, 0)
+        elif t % 3 == 0:
+            self.draw_rect(-1, 0)
         elif t % 2 == 0:
-            self.draw_rect(0, 1)
-        else:
             self.draw_rect(0, -1)
+        else:
+            self.draw_rect(0, 1)
