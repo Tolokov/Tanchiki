@@ -82,9 +82,9 @@ class GameWindow:
         self.player = Tank(self.screen, self.display_size, self.background_color, self.block_pixels)
 
     def create_enemy(self):
-        self.enemy.append(Enemy_1(self.screen, self.display_size, self.background_color, self.block_pixels, 650, 800))
-        self.enemy.append(Enemy_2(self.screen, self.display_size, self.background_color, self.block_pixels, 250, 800))
-        self.enemy.append(Enemy_2(self.screen, self.display_size, self.background_color, self.block_pixels, 450, 800))
+        self.enemy.append(Enemy1(self.screen, self.display_size, self.background_color, self.block_pixels, 650, 800))
+        self.enemy.append(Enemy2(self.screen, self.display_size, self.background_color, self.block_pixels, 250, 800))
+        self.enemy.append(Enemy3(self.screen, self.display_size, self.background_color, self.block_pixels, 450, 800))
 
     def create_wall(self, x, y):
         wall = Wall(self.screen, self.display_size, self.background_color, x, y)
