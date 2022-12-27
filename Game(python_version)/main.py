@@ -21,7 +21,7 @@ class GameWindow:
         self.objects = list()
         self.block_pixels = list()
         self.player = None
-        self.enemy = None
+        self.enemy = list()
 
     def set_icon(self):
         # Icon
@@ -51,7 +51,8 @@ class GameWindow:
                 if event.type == pygame.KEYDOWN:
                     self.screen.fill(self.background_color)
                     self.player.controller(event)
-                    self.enemy.controller()
+                    for enemy in self.enemy:
+                        enemy.controller()
                 for obj in self.objects:
                     obj.draw_rect()
                 # if environ['DEBUG'] == 'true':
@@ -81,7 +82,9 @@ class GameWindow:
         self.player = Tank(self.screen, self.display_size, self.background_color, self.block_pixels)
 
     def create_enemy(self):
-        self.enemy = Enemy(self.screen, self.display_size, self.background_color, self.block_pixels)
+        self.enemy.append(Enemy_1(self.screen, self.display_size, self.background_color, self.block_pixels, 650, 800))
+        self.enemy.append(Enemy_2(self.screen, self.display_size, self.background_color, self.block_pixels, 250, 800))
+        self.enemy.append(Enemy_2(self.screen, self.display_size, self.background_color, self.block_pixels, 450, 800))
 
     def create_wall(self, x, y):
         wall = Wall(self.screen, self.display_size, self.background_color, x, y)
