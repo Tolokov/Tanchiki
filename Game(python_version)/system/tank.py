@@ -1,4 +1,5 @@
-import pygame
+from pygame import transform, image, draw
+from pygame import K_LEFT, K_a, K_UP, K_w, K_DOWN, K_s, K_RIGHT, K_d, K_SPACE, K_z, K_PAUSE, K_RETURN
 from os import environ
 import time
 
@@ -7,8 +8,8 @@ class Bullet(object):
     def __init__(self):
         self.speed = 25
         self.direction = 'A'
-        self.bullet_sprite = pygame.image.load(r"..\images\fireA.png").convert_alpha()
-        self.bullet_sprite = pygame.transform.scale(self.bullet_sprite, (10, 10))
+        self.bullet_sprite = image.load(r"..\images\fireA.png").convert_alpha()
+        self.bullet_sprite = transform.scale(self.bullet_sprite, (10, 10))
 
 
 class Tank(object):
@@ -26,8 +27,7 @@ class Tank(object):
         # Position
         self.wight = 50
         self.height = 50
-        self.rectangle = pygame.draw.rect(self.screen, self.bg_color,
-                                          (self.pointX, self.pointY, self.wight, self.height))
+        self.rectangle = draw.rect(self.screen, self.bg_color, (self.pointX, self.pointY, self.wight, self.height))
 
         # Calculated border values
         self.head_border = self.pointY
@@ -35,6 +35,7 @@ class Tank(object):
         self.left_border = self.pointX
         self.right_border = self.border[0] - (self.wight + self.pointX)
 
+        self.player_sprite = None
         self.player_sprite_W = None
         self.player_sprite_W_2 = None
         self.player_sprite_D = None
@@ -43,6 +44,11 @@ class Tank(object):
         self.player_sprite_A_2 = None
         self.player_sprite_S = None
         self.player_sprite_S_2 = None
+
+        self.w_animated = None
+        self.a_animated = None
+        self.d_animated = None
+        self.s_animated = None
 
     def draw_rect(self, x, y):
         move_x = x * self.speed
@@ -150,7 +156,7 @@ class Tank(object):
             self.right_border = self.border[1] - self.height
 
         self.rectangle = self.rectangle.move(move_x, move_y)
-        pygame.draw.rect(self.screen, self.bg_color, self.rectangle)
+        draw.rect(self.screen, self.bg_color, self.rectangle)
         self.screen.blit(self.player_sprite, self.rectangle)
 
     @staticmethod
@@ -163,30 +169,23 @@ class Player(Tank):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Player images
-        self.player_sprite_W = pygame.image.load(r"..\images\playerW.png").convert_alpha()
-        self.player_sprite_W = pygame.transform.scale(self.player_sprite_W, (self.wight, self.height))
         self.w_animated = True
-        self.player_sprite_W_2 = pygame.image.load(r"..\images\playerW1.png").convert_alpha()
-        self.player_sprite_W_2 = pygame.transform.scale(self.player_sprite_W_2, (self.wight, self.height))
-
-        self.player_sprite_A = pygame.image.load(r"..\images\playerA.png").convert_alpha()
-        self.player_sprite_A = pygame.transform.scale(self.player_sprite_A, (self.wight, self.height))
         self.a_animated = True
-        self.player_sprite_A_2 = pygame.image.load(r"..\images\playerA1.png").convert_alpha()
-        self.player_sprite_A_2 = pygame.transform.scale(self.player_sprite_A_2, (self.wight, self.height))
-
-        self.player_sprite_S = pygame.image.load(r"..\images\playerS.png").convert_alpha()
-        self.player_sprite_S = pygame.transform.scale(self.player_sprite_S, (self.wight, self.height))
         self.s_animated = True
-        self.player_sprite_S_2 = pygame.image.load(r"..\images\playerS1.png").convert_alpha()
-        self.player_sprite_S_2 = pygame.transform.scale(self.player_sprite_S_2, (self.wight, self.height))
-
-        self.player_sprite_D = pygame.image.load(r"..\images\playerD.png").convert_alpha()
-        self.player_sprite_D = pygame.transform.scale(self.player_sprite_D, (self.wight, self.height))
         self.d_animated = True
-        self.player_sprite_D_2 = pygame.image.load(r"..\images\playerD1.png").convert_alpha()
-        self.player_sprite_D_2 = pygame.transform.scale(self.player_sprite_D_2, (self.wight, self.height))
+
+        # Player images
+        self.player_sprite_W = transform.scale(image.load(r"..\images\playerW.png"), (self.wight, self.height))
+        self.player_sprite_W_2 = transform.scale(image.load(r"..\images\playerW1.png"), (self.wight, self.height))
+
+        self.player_sprite_A = transform.scale(image.load(r"..\images\playerA.png"), (self.wight, self.height))
+        self.player_sprite_A_2 = transform.scale(image.load(r"..\images\playerA1.png"), (self.wight, self.height))
+
+        self.player_sprite_S = transform.scale(image.load(r"..\images\playerS.png"), (self.wight, self.height))
+        self.player_sprite_S_2 = transform.scale(image.load(r"..\images\playerS1.png"), (self.wight, self.height))
+
+        self.player_sprite_D = transform.scale(image.load(r"..\images\playerD.png"), (self.wight, self.height))
+        self.player_sprite_D_2 = transform.scale(image.load(r"..\images\playerD1.png"), (self.wight, self.height))
 
         # Default direction
         self.player_sprite = self.player_sprite_W
@@ -196,44 +195,44 @@ class Player(Tank):
 
     def controller(self, event):
         # Up key
-        if event.key == pygame.K_w or event.key == pygame.K_UP:
+        if event.key == K_w or event.key == K_UP:
             if environ['DEBUG'] == 'true':
                 print('UP ', end='')
             self.draw_rect(0, -1)
 
         # Down key
-        elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
+        elif event.key == K_a or event.key == K_LEFT:
             if environ['DEBUG'] == 'true':
                 print('LEFT ', end='')
             self.draw_rect(-1, 0)
 
         # Left key
-        elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
+        elif event.key == K_s or event.key == K_DOWN:
             if environ['DEBUG'] == 'true':
                 print('DOWN ', end='')
             self.draw_rect(0, 1)
 
         # Right key
-        elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+        elif event.key == K_d or event.key == K_RIGHT:
             if environ['DEBUG'] == 'true':
                 print('RIGHT ', end='')
             self.draw_rect(1, 0)
 
         # Shoot key
-        elif event.key == pygame.K_SPACE or event.key == pygame.K_z:
+        elif event.key == K_SPACE or event.key == K_z:
             if environ['DEBUG'] == 'true':
                 print('Z ', end='')
             self.draw_rect(0, 0)
             self.shot()
 
         # Pause key
-        elif event.key == pygame.K_PAUSE:
+        elif event.key == K_PAUSE:
             if environ['DEBUG'] == 'true':
                 print('PAUSE ', end='')
             self.draw_rect(0, 0)
 
         # Enter key
-        elif event.key == pygame.K_RETURN:
+        elif event.key == K_RETURN:
             if environ['DEBUG'] == 'true':
                 print('K_RETURN ', end='')
             self.draw_rect(0, 0)
@@ -244,30 +243,24 @@ class Player(Tank):
 class Enemy1(Tank):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Enemy images
-        self.player_sprite_W = pygame.image.load(r"..\images\enemyW.png").convert_alpha()
-        self.player_sprite_W = pygame.transform.scale(self.player_sprite_W, (self.wight, self.height))
+
         self.w_animated = True
-        self.player_sprite_W_2 = pygame.image.load(r"..\images\enemyW1.png").convert_alpha()
-        self.player_sprite_W_2 = pygame.transform.scale(self.player_sprite_W_2, (self.wight, self.height))
-
-        self.player_sprite_A = pygame.image.load(r"..\images\enemyA.png").convert_alpha()
-        self.player_sprite_A = pygame.transform.scale(self.player_sprite_A, (self.wight, self.height))
         self.a_animated = True
-        self.player_sprite_A_2 = pygame.image.load(r"..\images\enemyA1.png").convert_alpha()
-        self.player_sprite_A_2 = pygame.transform.scale(self.player_sprite_A_2, (self.wight, self.height))
-
-        self.player_sprite_S = pygame.image.load(r"..\images\enemyS.png").convert_alpha()
-        self.player_sprite_S = pygame.transform.scale(self.player_sprite_S, (self.wight, self.height))
         self.s_animated = True
-        self.player_sprite_S_2 = pygame.image.load(r"..\images\enemyS1.png").convert_alpha()
-        self.player_sprite_S_2 = pygame.transform.scale(self.player_sprite_S_2, (self.wight, self.height))
-
-        self.player_sprite_D = pygame.image.load(r"..\images\enemyD.png").convert_alpha()
-        self.player_sprite_D = pygame.transform.scale(self.player_sprite_D, (self.wight, self.height))
         self.d_animated = True
-        self.player_sprite_D_2 = pygame.image.load(r"..\images\enemyD1.png").convert_alpha()
-        self.player_sprite_D_2 = pygame.transform.scale(self.player_sprite_D_2, (self.wight, self.height))
+
+        # Enemy images
+        self.player_sprite_W = transform.scale(image.load(r"..\images\enemyW.png"), (self.wight, self.height))
+        self.player_sprite_W_2 = transform.scale(image.load(r"..\images\enemyW1.png"), (self.wight, self.height))
+
+        self.player_sprite_A = transform.scale(image.load(r"..\images\enemyA.png"), (self.wight, self.height))
+        self.player_sprite_A_2 = transform.scale(image.load(r"..\images\enemyA1.png"), (self.wight, self.height))
+
+        self.player_sprite_S = transform.scale(image.load(r"..\images\enemyS.png"), (self.wight, self.height))
+        self.player_sprite_S_2 = transform.scale(image.load(r"..\images\enemyS1.png"), (self.wight, self.height))
+
+        self.player_sprite_D = transform.scale(image.load(r"..\images\enemyD.png"), (self.wight, self.height))
+        self.player_sprite_D_2 = transform.scale(image.load(r"..\images\enemyD1.png"), (self.wight, self.height))
 
         # Default direction
         self.player_sprite = self.player_sprite_W
@@ -291,30 +284,23 @@ class Enemy2(Tank):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Player image
-        self.player_sprite_W = pygame.image.load(r"..\images\green-enemyW.png").convert_alpha()
-        self.player_sprite_W = pygame.transform.scale(self.player_sprite_W, (self.wight, self.height))
         self.w_animated = True
-        self.player_sprite_W_2 = pygame.image.load(r"..\images\green-enemyW1.png").convert_alpha()
-        self.player_sprite_W_2 = pygame.transform.scale(self.player_sprite_W_2, (self.wight, self.height))
-
-        self.player_sprite_A = pygame.image.load(r"..\images\green-enemyA.png").convert_alpha()
-        self.player_sprite_A = pygame.transform.scale(self.player_sprite_A, (self.wight, self.height))
         self.a_animated = True
-        self.player_sprite_A_2 = pygame.image.load(r"..\images\green-enemyA1.png").convert_alpha()
-        self.player_sprite_A_2 = pygame.transform.scale(self.player_sprite_A_2, (self.wight, self.height))
-
-        self.player_sprite_S = pygame.image.load(r"..\images\green-enemyS.png").convert_alpha()
-        self.player_sprite_S = pygame.transform.scale(self.player_sprite_S, (self.wight, self.height))
         self.s_animated = True
-        self.player_sprite_S_2 = pygame.image.load(r"..\images\green-enemyS1.png").convert_alpha()
-        self.player_sprite_S_2 = pygame.transform.scale(self.player_sprite_S_2, (self.wight, self.height))
-
-        self.player_sprite_D = pygame.image.load(r"..\images\green-enemyD.png").convert_alpha()
-        self.player_sprite_D = pygame.transform.scale(self.player_sprite_D, (self.wight, self.height))
         self.d_animated = True
-        self.player_sprite_D_2 = pygame.image.load(r"..\images\green-enemyD1.png").convert_alpha()
-        self.player_sprite_D_2 = pygame.transform.scale(self.player_sprite_D_2, (self.wight, self.height))
+
+        # Player image
+        self.player_sprite_W = transform.scale(image.load(r"..\images\green-enemyW.png"), (self.wight, self.height))
+        self.player_sprite_W_2 = transform.scale(image.load(r"..\images\green-enemyW1.png"), (self.wight, self.height))
+
+        self.player_sprite_A = transform.scale(image.load(r"..\images\green-enemyA.png"), (self.wight, self.height))
+        self.player_sprite_A_2 = transform.scale(image.load(r"..\images\green-enemyA1.png"), (self.wight, self.height))
+
+        self.player_sprite_S = transform.scale(image.load(r"..\images\green-enemyS.png"), (self.wight, self.height))
+        self.player_sprite_S_2 = transform.scale(image.load(r"..\images\green-enemyS1.png"), (self.wight, self.height))
+
+        self.player_sprite_D = transform.scale(image.load(r"..\images\green-enemyD.png"), (self.wight, self.height))
+        self.player_sprite_D_2 = transform.scale(image.load(r"..\images\green-enemyD1.png"), (self.wight, self.height))
 
         # Default direction
         self.player_sprite = self.player_sprite_W
@@ -338,30 +324,23 @@ class Enemy3(Tank):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Player image
-        self.player_sprite_W = pygame.image.load(r"..\images\red-enemyW.png").convert_alpha()
-        self.player_sprite_W = pygame.transform.scale(self.player_sprite_W, (self.wight, self.height))
         self.w_animated = True
-        self.player_sprite_W_2 = pygame.image.load(r"..\images\red-enemyW1.png").convert_alpha()
-        self.player_sprite_W_2 = pygame.transform.scale(self.player_sprite_W_2, (self.wight, self.height))
-
-        self.player_sprite_A = pygame.image.load(r"..\images\red-enemyA.png").convert_alpha()
-        self.player_sprite_A = pygame.transform.scale(self.player_sprite_A, (self.wight, self.height))
         self.a_animated = True
-        self.player_sprite_A_2 = pygame.image.load(r"..\images\red-enemyA1.png").convert_alpha()
-        self.player_sprite_A_2 = pygame.transform.scale(self.player_sprite_A_2, (self.wight, self.height))
-
-        self.player_sprite_S = pygame.image.load(r"..\images\red-enemyS.png").convert_alpha()
-        self.player_sprite_S = pygame.transform.scale(self.player_sprite_S, (self.wight, self.height))
         self.s_animated = True
-        self.player_sprite_S_2 = pygame.image.load(r"..\images\red-enemyS1.png").convert_alpha()
-        self.player_sprite_S_2 = pygame.transform.scale(self.player_sprite_S_2, (self.wight, self.height))
-
-        self.player_sprite_D = pygame.image.load(r"..\images\red-enemyD.png").convert_alpha()
-        self.player_sprite_D = pygame.transform.scale(self.player_sprite_D, (self.wight, self.height))
         self.d_animated = True
-        self.player_sprite_D_2 = pygame.image.load(r"..\images\red-enemyD1.png").convert_alpha()
-        self.player_sprite_D_2 = pygame.transform.scale(self.player_sprite_D_2, (self.wight, self.height))
+
+        # Player image
+        self.player_sprite_W = transform.scale(image.load(r"..\images\red-enemyW.png"), (self.wight, self.height))
+        self.player_sprite_W_2 = transform.scale(image.load(r"..\images\red-enemyW1.png"), (self.wight, self.height))
+
+        self.player_sprite_A = transform.scale(image.load(r"..\images\red-enemyA.png"), (self.wight, self.height))
+        self.player_sprite_A_2 = transform.scale(image.load(r"..\images\red-enemyA1.png"), (self.wight, self.height))
+
+        self.player_sprite_S = transform.scale(image.load(r"..\images\red-enemyS.png"), (self.wight, self.height))
+        self.player_sprite_S_2 = transform.scale(image.load(r"..\images\red-enemyS1.png"), (self.wight, self.height))
+
+        self.player_sprite_D = transform.scale(image.load(r"..\images\red-enemyD.png"), (self.wight, self.height))
+        self.player_sprite_D_2 = transform.scale(image.load(r"..\images\red-enemyD1.png"), (self.wight, self.height))
 
         # Default direction
         self.player_sprite = self.player_sprite_W
