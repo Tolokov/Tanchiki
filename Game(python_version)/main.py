@@ -55,10 +55,11 @@ class GameWindow:
                         enemy.controller()
                 for obj in self.objects:
                     obj.draw_rect()
+
                 # if environ['DEBUG'] == 'true':
-                    # if pygame.mouse.get_focused():
-                    #     pos = pygame.mouse.get_pos()
-                    #     print(pos)
+                #     if pygame.mouse.get_focused():
+                #         pos = pygame.mouse.get_pos()
+                #         print(pos, end='')
 
             # Display update
             pygame.display.update()
@@ -79,7 +80,7 @@ class GameWindow:
         self.build()
 
     def create_player(self):
-        self.player = Tank(self.screen, self.display_size, self.background_color, self.block_pixels)
+        self.player = Player(self.screen, self.display_size, self.background_color, self.block_pixels, 450, 450)
 
     def create_enemy(self):
         self.enemy.append(Enemy1(self.screen, self.display_size, self.background_color, self.block_pixels, 650, 600))
