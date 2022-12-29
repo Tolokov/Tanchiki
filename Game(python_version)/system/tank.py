@@ -3,6 +3,14 @@ from os import environ
 import time
 
 
+class Bullet(object):
+    def __init__(self):
+        self.speed = 25
+        self.direction = 'A'
+        self.bullet_sprite = pygame.image.load(r"..\images\fireA.png").convert_alpha()
+        self.bullet_sprite = pygame.transform.scale(self.bullet_sprite, (10, 10))
+
+
 class Tank(object):
     def __init__(self, screen, display_size, bg_color, block_pixels, pointX, pointY):
         self.speed = 25
@@ -145,6 +153,11 @@ class Tank(object):
         pygame.draw.rect(self.screen, self.bg_color, self.rectangle)
         self.screen.blit(self.player_sprite, self.rectangle)
 
+    @staticmethod
+    def shot():
+        Bullet()
+        print('SHOT!!!')
+
 
 class Player(Tank):
     def __init__(self, *args, **kwargs):
@@ -211,6 +224,7 @@ class Player(Tank):
             if environ['DEBUG'] == 'true':
                 print('Z ', end='')
             self.draw_rect(0, 0)
+            self.shot()
 
         # Pause key
         elif event.key == pygame.K_PAUSE:

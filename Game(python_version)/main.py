@@ -22,6 +22,7 @@ class GameWindow:
         self.block_pixels = list()
         self.player = None
         self.enemy = list()
+        self.bullets = list()
 
     def set_icon(self):
         # Icon
