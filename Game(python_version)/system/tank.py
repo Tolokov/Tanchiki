@@ -10,6 +10,17 @@ class Bullet(object):
         self.direction = 'A'
         self.bullet_sprite = image.load(r"..\images\fireA.png").convert_alpha()
         self.bullet_sprite = transform.scale(self.bullet_sprite, (10, 10))
+        self.counter = 0
+
+    def __del__(self):
+        print('Объект уничтожен')
+
+    def draw_rect(self):
+        self.counter += 1
+        print(self.counter)
+        # if self.counter == 5:
+        #     print('Уничтожить объект')
+        #     self.__del__()
 
 
 class Tank(object):

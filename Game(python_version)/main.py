@@ -43,7 +43,8 @@ class GameWindow:
     def build(self):
         # Infinite loop
         while self.status_run:
-
+            for enemy in self.enemy:
+                enemy.controller()
             for event in pygame.event.get():
                 # Quit buttons
                 if event.type == pygame.QUIT:
@@ -51,15 +52,15 @@ class GameWindow:
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     self.status_run = False
 
-                for enemy in self.enemy:
-                    enemy.controller()
-
                 if event.type == pygame.KEYDOWN:
                     self.screen.fill(self.background_color)
                     self.player.controller(event)
 
                 for obj in self.objects:
                     obj.draw_rect()
+
+                # for bullet in self.bullets:
+                #     bullet.draw_rect()
 
                 # if environ['DEBUG'] == 'true':
                 #     if pygame.mouse.get_focused():
