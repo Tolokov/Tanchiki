@@ -1,5 +1,7 @@
-import pygame
+import time
 from os import environ
+
+import pygame
 
 from system.tank import *
 from system.objects import *
@@ -41,6 +43,7 @@ class GameWindow:
     def build(self):
         # Infinite loop
         while self.status_run:
+
             for event in pygame.event.get():
                 # Quit buttons
                 if event.type == pygame.QUIT:
@@ -48,12 +51,13 @@ class GameWindow:
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     self.status_run = False
 
-                # Move buttons
+                for enemy in self.enemy:
+                    enemy.controller()
+
                 if event.type == pygame.KEYDOWN:
                     self.screen.fill(self.background_color)
                     self.player.controller(event)
-                    for enemy in self.enemy:
-                        enemy.controller()
+
                 for obj in self.objects:
                     obj.draw_rect()
 

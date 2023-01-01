@@ -155,14 +155,18 @@ class Tank(object):
             self.left_border = 0
             self.right_border = self.border[1] - self.height
 
-        self.rectangle = self.rectangle.move(move_x, move_y)
         draw.rect(self.screen, self.bg_color, self.rectangle)
+        self.rectangle = self.rectangle.move(move_x, move_y)
         self.screen.blit(self.player_sprite, self.rectangle)
 
     @staticmethod
     def shot():
-        Bullet()
         print('SHOT!!!')
+        Bullet()
+
+    def get_bullet_pixels(self):
+        return 'BULLET IS SHOT!!!!'
+
 
 
 class Player(Tank):
