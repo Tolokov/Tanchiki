@@ -153,3 +153,4 @@ if "__main__" == __name__:
         print('Debug mod: ON')
     game = GameWindow()
     game.run()
+
